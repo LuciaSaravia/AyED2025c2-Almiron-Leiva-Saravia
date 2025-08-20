@@ -23,7 +23,13 @@ class ListaDobleEnlazada:
     @tamanio.setter
     def tamanio(self, dato):
         self.__tamanio = dato
-        
+
+    def esta_vacia(self):
+        if self.tamanio==0:
+            return True
+        else:
+            return False   
+
     def agregar_al_inicio(self, dato):
         nuevo_nodo = Nodo(dato)
         if self.cabeza is None:
@@ -37,13 +43,19 @@ class ListaDobleEnlazada:
             
     def agregar_al_final(self, dato):
         nuevo_nodo = Nodo(dato)
-        nuevo_nodo.anterior = self.cola
-        self.cola.siguiente = nuevo_nodo
-        self.cola = nuevo_nodo
-        
+        if self.cola is None:
+            self.cabeza = nuevo_nodo
+            self.cola = nuevo_nodo
+        else:
+            self.cola.siguiente = nuevo_nodo
+            nuevo_nodo.anterior = self.cola
+            self.cola = nuevo_nodo
+        self.tamanio += 1
+
     def insertar(self,dato,posicion):
         if posicion<0 or posicion>self.tamanio:
             raise Exception ("Posición invalida")
+
         if posicion==0:
             self.agregar_al_inicio(dato)
         elif posicion==self.tamanio:
@@ -51,12 +63,56 @@ class ListaDobleEnlazada:
         else:
             nuevo_nodo=Nodo(dato)
             actual=self.cabeza
-            for __ in range (posicion): #hay que cambiar __
+            for _ in range (posicion): 
                 actual=actual.siguiente
+
             nuevo_nodo.anterior=actual.anterior
             nuevo_nodo.siguiente=actual
-            actual.anterior.siguinte=nuevo_nodo
+            actual.anterior.siguiente=nuevo_nodo
             actual.anterior=nuevo_nodo
+            self.tamanio += 1
+    
+    def extraer(self, posicion=None):
+        if self.esta_vacia():
+            raise Exception("La lista está vacía")
+        
+        if posicion is None:
+            posicion = self.tamanio - 1 #saca el último si no le da posicion
+        
+        if posicion < 0 or posicion >= self.tamanio:
+            raise Exception("Posición inválida") #le da una posicion que no existe
+        
+        if posicion == 0:  # saca la cabeza
+            dato = self.cabeza.dato
+            self.cabeza = self.cabeza.siguiente
+            if self.cabeza is not None:
+                self.cabeza.anterior = None
+            else: #si la lista quedo vacia
+                self.cola = None
+            self.tamanio -= 1
+            return dato
+        
+        if posicion == self.tamanio - 1: #saca la cola
+            dato = self.cola.dato
+            self.cola = self.cola.anterior
+            if self.cola is not None:
+                self.cola.siguiente = None
+            else: #si la lista quedo vacia
+                self.cabeza = None
+            self.tamanio -= 1
+            return dato
+        #para sacar del medio:
+        actual = self.cabeza
+        for _ in range(posicion):
+            actual = actual.siguiente
+        
+        dato = actual.dato
+        actual.anterior.siguiente = actual.siguiente
+        actual.siguiente.anterior = actual.anterior
+        self.tamanio -= 1
+        return dato 
+    
+    
     
     def copiar (self):
         copia=ListaDobleEnlazada()
@@ -66,28 +122,15 @@ class ListaDobleEnlazada:
             actual=actual.siguiente
         return copia
 
-    def esta_vacia(self):
-        if self.tamanio==0:
-            return True
-        else:
-            return False
+
         
-    def extraer(self, posicion=None):
-        actual = self.cola
-        previo = None
-        encontrado = False
-        while not encontrado:
-            if posicion is None:
-                previo = self.cola.anterior
+
                 
                 
-            
-        
-    
     def __len__(self):
         return self.tamanio
-    def __iter__(self):
-        pass
+
+
 if __name__ == '__main__':
     lista= ListaDobleEnlazada()
     lista.agregar_al_inicio(3)
