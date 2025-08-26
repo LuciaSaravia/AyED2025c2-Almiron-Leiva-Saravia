@@ -113,9 +113,6 @@ class ListaDobleEnlazada:
             actual = actual.siguiente
         return copia
 
-    def __len__(self):
-        return self.tamanio
-
     def invertir(self):
         actual = self.cabeza
         cabeza = self.cabeza
@@ -126,6 +123,23 @@ class ListaDobleEnlazada:
             actual = temp
         self.cabeza = self.cola
         self.cola = cabeza
+
+    #def concatenar(self, otra_lista):
+        
+   
+
+    def __len__(self):
+        return self.tamanio
+    
+    def __add__(self, otra_lista):
+        nueva=self.copiar()
+        nueva.concatenar(otra_lista) #usando la funcion de concatenar pero todavia no la tenemos
+        return nueva
+#si no usamos concatenar, capaz podemos usar el de agregar al final pero me parece que queda mas largo
+    def __iter__(self):
+        actual = self.cabeza
+
+
         
 if __name__ == '__main__':
     lista= ListaDobleEnlazada()
