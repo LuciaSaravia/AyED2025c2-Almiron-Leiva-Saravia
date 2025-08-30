@@ -124,9 +124,14 @@ class ListaDobleEnlazada:
         self.cabeza = self.cola
         self.cola = cabeza
 
-    #def concatenar(self, otra_lista):
-        
-   
+    def concatenar(self, otra_lista):
+        if otra_lista.esta_vacia():
+            return
+        else:
+            self.cola.siguiente = otra_lista.cabeza
+            otra_lista.cabeza.anterior = self.cola
+            self.cola = otra_lista.cola
+        self.tamanio += otra_lista.tamanio
 
     def __len__(self):
         return self.tamanio
@@ -138,6 +143,7 @@ class ListaDobleEnlazada:
 #si no usamos concatenar, capaz podemos usar el de agregar al final pero me parece que queda mas largo
     def __iter__(self):
         actual = self.cabeza
+        
 
 
         
