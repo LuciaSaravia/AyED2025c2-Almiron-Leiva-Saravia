@@ -70,13 +70,17 @@ class ListaDobleEnlazada:
             actual.anterior = nuevo_nodo
             self.tamanio += 1
 
-    def extraer(self, posicion=None):
+    def extraer(self, posicion= None):
         if self.esta_vacia():
             raise Exception("La lista está vacía")
-        if posicion < 0 or posicion >= self.tamanio:
-            raise Exception("Posición inválida")
-        # if posicion is None:
-        #     posicion = self.tamanio - 1 #saca el último si no le da posicion
+        if posicion is None:
+            posicion = self.tamanio - 1 #saca el último si no le da posicion
+        if posicion < 0:
+            posicion += self.tamanio
+        if posicion is not None:
+            if posicion < 0 or posicion >= self.tamanio:
+                raise Exception("Posición inválida")
+            
         if posicion == 0:  # saca la cabeza
             dato = self.cabeza.dato
             self.cabeza = self.cabeza.siguiente
@@ -86,7 +90,7 @@ class ListaDobleEnlazada:
                 self.cola = None
             self.tamanio -= 1
             return dato
-        elif posicion == self.tamanio or posicion is None: #saca la cola
+        elif posicion == self.tamanio -1: #saca la cola
             dato = self.cola.dato
             self.cola = self.cola.anterior
             if self.cola is not None:
@@ -100,8 +104,10 @@ class ListaDobleEnlazada:
             for _ in range(posicion):
                 actual = actual.siguiente
             dato = actual.dato
-            actual.anterior.siguiente = actual.siguiente
-            actual.siguiente.anterior = actual.anterior
+            actual_anterior = actual.anterior
+            actual_siguiente = actual.siguiente
+            actual_anterior.siguiente = actual.siguiente
+            actual_siguiente.anterior = actual.anterior
             self.tamanio -= 1
             return dato
 
@@ -125,13 +131,19 @@ class ListaDobleEnlazada:
         self.cola = cabeza
 
     def concatenar(self, otra_lista):
-        if otra_lista.esta_vacia():
+        if otra_lista.cabeza is None:
             return
+        lista_copia = otra_lista.copiar()
+
+        if self.esta_vacia():
+            self.cabeza = lista_copia.cabeza
+            self.cola = lista_copia.cola
+            self.tamanio = lista_copia.tamanio
         else:
-            self.cola.siguiente = otra_lista.cabeza
-            otra_lista.cabeza.anterior = self.cola
-            self.cola = otra_lista.cola
-        self.tamanio += otra_lista.tamanio
+            self.cola.siguiente = lista_copia.cabeza
+            lista_copia.cabeza.anterior = self.cola
+            self.cola = lista_copia.cola
+            self.tamanio += lista_copia.tamanio
 
     def __len__(self):
         return self.tamanio
