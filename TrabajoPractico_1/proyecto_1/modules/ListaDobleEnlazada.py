@@ -152,12 +152,12 @@ class ListaDobleEnlazada:
         nueva=self.copiar()
         nueva.concatenar(otra_lista) #usando la funcion de concatenar pero todavia no la tenemos
         return nueva
-#si no usamos concatenar, capaz podemos usar el de agregar al final pero me parece que queda mas largo
+
     def __iter__(self):
         actual = self.cabeza
-        
-
-
+        while actual is not None:
+            yield actual.dato
+            actual = actual.siguiente
         
 if __name__ == '__main__':
     lista= ListaDobleEnlazada()

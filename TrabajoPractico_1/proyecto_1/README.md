@@ -1,8 +1,6 @@
-# 🐍Nombre del proyecto (darle un nombre significativo) 
+# 🐍Problema 1: Lista doblemente enlazada 
 
-Breve descripción del proyecto:
-
-Ejemplo: “Este es un script en el que se comparan algoritmos de ordenamiento. Permite [describir funcionalidades principales].
+Se implementa TAD Lista doblemente enlazada que permite almacenar elementos y tiene la implementacion pedida, la cual es probada por el test provisto por la catedra. Ademas se realiza graficas de N ( cantidad de elementos) vs tiempo de ejecuacion para los metodos len, copiar e invertir.
 
 ---
 ## 🏗Arquitectura General
@@ -18,8 +16,6 @@ El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
 
 1. **Python 3.x**
 2. **matplotlib** (`pip install matplotlib`)
-3. listar dependencias principales
-4. Dependencias listadas en requierements.txt
 
 ---
 ## 🚀Cómo Ejecutar el Proyecto
@@ -38,8 +34,5 @@ El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
 
 - Almirón Spahn, Maria Paz
 - Leiva, Giuliana 
-- Saravia, Lucia
+- Saravia, Lucia Milagros
 
----
-
-> **Consejo**: Mantén el README **actualizado** conforme evoluciona el proyecto, y elimina (o añade) secciones según necesites. Esta plantilla es sólo un punto de partida general.
