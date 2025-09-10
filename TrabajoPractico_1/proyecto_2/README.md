@@ -1,33 +1,14 @@
-# 🐍Problema 1: Lista doblemente enlazada 
-
-Se implementa TAD Lista doblemente enlazada que permite almacenar elementos y tiene la implementacion pedida, la cual es probada por el test provisto por la catedra. Ademas se realiza graficas de N ( cantidad de elementos) vs tiempo de ejecuacion para los metodos len, copiar e invertir.
-
+# 🐍Problema 2: Juego guerra
+En este problema, se nos requeria incorporar la clase Mazo al juego de cartas "Guerra", para esto hicmos uso de la Lista Doblemente Enlaza que realizamos en el ejercicio anterior. Asimismo, creamos nuevas funciones, distintas de las cuales nos fueron proporcionadas por la cátedra, permitiendonos ejecutar los tests sin problema alguno. 
 ---
 ## 🏗Arquitectura General
 
-Explica brevemente cómo está organizado el código (funciones y/o clases)
-
-Las gráficas de los resultados están disponible en la carpeta [data](./data) del proyecto.
-
-El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
+Podemos encontrar una clase Carta, Mazo, Nodo, LDE y juegoGuerra. La clase mazo va a tener las funciones de poner arriba, poner abajo y sacar arriba la carta utilizando funciones de la clase ListaDobleEnlazada, mientras que la clase juegoGuerra contiene las funciones armar mazo inicial, repartir carta, iniciar juego y mostrar juego que nos van a permitir llevar acabo el juego.
 
 ---
 ## 📑Dependencias
 
-1. **Python 3.x**
-2. **matplotlib** (`pip install matplotlib`)
-
----
-## 🚀Cómo Ejecutar el Proyecto
-1. **Clonar o descargar** el repositorio.
-
-2. **Crear y activar** un entorno virtual.
-
-3. **Instalar las dependencias**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   El archivo `requirements.txt` se encuentran en la carpeta [deps](./deps) del proyecto.
+1. **matplotlib**
 
 ---
 ## 🙎‍♀️🙎‍♂️Autores
