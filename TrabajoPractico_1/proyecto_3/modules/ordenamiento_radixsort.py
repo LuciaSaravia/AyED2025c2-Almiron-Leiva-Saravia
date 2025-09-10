@@ -36,8 +36,7 @@ if __name__=="__main__":
     print(f"Lista ordenanda: {lista_ordenada}")
     
     lista_ord_sorted = sorted(valores)
-    #Para comprobar que el algoritmo de ordenamiento radixsort funciona utilizamos la funcion 
-    #sorted (la cual ya esta incorporada en Python) y luego comparamos elemento a elemento
+    #Para comprobar que el algoritmo de ordenamiento radixsort funciona utilizamos la funcion sorted (la cual ya esta incorporada en Python) y luego comparamos elemento a elemento
     comprobar = 0
     for i in range(500):
         if lista_ord_sorted[i] == lista_ordenada[i]:

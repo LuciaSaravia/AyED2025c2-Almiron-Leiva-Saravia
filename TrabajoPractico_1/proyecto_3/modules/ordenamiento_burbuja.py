@@ -16,12 +16,10 @@ if __name__=='__main__':
         valores.append(valor)
     lista_ord_sorted = sorted(valores)
     lista_ordenada= ord_burbuja(valores)
-    #Para comprobar que el algoritmos de ordenamiento burbuja 
-    #funcione utilizamos la funcion sorted y comparamos elemento por elemento de ambas listas ordenadas
+    #Para comprobar que el algoritmos de ordenamiento burbuja funcione utilizamos la funcion sorted y comparamos elemento por elemento de ambas listas ordenadas
     comprobar = 0
     for i in range(500):
         if lista_ord_sorted[i] == lista_ordenada[i]:
             comprobar+=1
     print(comprobar)
     # print(f'lista ordenada: {lista_ordenada}')
-

@@ -41,12 +41,12 @@ def medir_tiempo_randixsort(tamanios):
 
 
 #Graficacion
-tamanios = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+tamanios = [1, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 tiempos_burbuja = medir_tiempo_ord_burbuja(tamanios)
 tiempos_quick = medir_tiempo_quickSort(tamanios)
 tiempos_randix = medir_tiempo_randixsort(tamanios)
 plt.figure(figsize=(10, 6))
-plt.plot(tamanios, tiempos_burbuja, marker='o', label='ordenamiento burbuja')
+# plt.plot(tamanios, tiempos_burbuja, marker='o', label='ordenamiento burbuja')
 plt.plot(tamanios, tiempos_quick, marker= 'o', label ='ordenamiento quickSort')
 plt.plot(tamanios, tiempos_randix, marker = 'o', label = 'ordenamiento radix')
 plt.xlabel('Tamaño de la lista')
