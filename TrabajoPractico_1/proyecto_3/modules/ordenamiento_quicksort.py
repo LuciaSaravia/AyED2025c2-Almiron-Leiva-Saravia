@@ -49,7 +49,7 @@ if __name__=='__main__':
     for i in range(500):
         if lista_ord_sorted[i] == lista_ordenada[i]:
             comprobar+=1
-    print ( comprobar)
+    print (comprobar)
     #print(f"La lista ordenada: {orden}")
     
     # print(f'lista ordenada: {lista_ordenada}')
