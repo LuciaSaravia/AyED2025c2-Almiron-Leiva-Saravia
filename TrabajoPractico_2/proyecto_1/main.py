@@ -16,13 +16,14 @@ cola_de_espera = list()
 for i in range(n):
     # Fecha y hora de entrada de un paciente
     ahora = datetime.datetime.now()
+    print(ahora)
     fecha_y_hora = ahora.strftime('%d/%m/%Y %H:%M:%S')
     print('-*-'*15)
     print('\n', fecha_y_hora, '\n')
 
     # Se crea un paciente un paciente por segundo
     # La criticidad del paciente es aleatoria
-    paciente = pac.Paciente()
+    paciente = pac.Paciente(ahora) #como deberiamos pasar la hora tipo str o ahora
     cola_de_espera.append(paciente)
 
     # Atención de paciente en este ciclo: en el 50% de los casos
