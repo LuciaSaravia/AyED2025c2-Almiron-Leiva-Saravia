@@ -38,11 +38,10 @@ class Paciente:
         return cad
     
     def __lt__(self, otro_paciente):
-        if self.__riesgo < otro_paciente.__riesgo:
-            return True
+        if self.__riesgo != otro_paciente.__riesgo: #si los riesgos son distintos va a pasar el menor (1)
+            return self.__riesgo < otro_paciente.__riesgo
+        return self.__tiempo < otro_paciente.__tiempo #si tienen el mismo riesgo gana el menor (llego primero)
         
             
-        #como segundo criterio usamos el tiempo de llegada  
-        
         
         
