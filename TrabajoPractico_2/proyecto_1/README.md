@@ -1,44 +1,17 @@
-# 🐍Nombre del proyecto (darle un nombre significativo) 
+# 🐍Nombre del proyecto sala de emergencia 
 
-Breve descripción del proyecto:
-
-Ejemplo: “Este es un script en el que se comparan algoritmos de ordenamiento. Permite [describir funcionalidades principales].
+En este proyecto se nos pidio simular una sala de emergencia en donde nos llegaban pacientes con distintos niveles de riesgo, y en caso de que 2 pacientes tengan el mismo nivel de riesgo deberiamos aplicar un segundo criterio para ver a quien atender primero.
 
 ---
 ## 🏗Arquitectura General
 
-Explica brevemente cómo está organizado el código (funciones y/o clases)
-
-Las gráficas de los resultados están disponible en la carpeta [data](./data) del proyecto.
-
-El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
-
----
-## 📑Dependencias
-
-1. **Python 3.x**
-2. **matplotlib** (`pip install matplotlib`)
-3. listar dependencias principales
-4. Dependencias listadas en requierements.txt
-
----
-## 🚀Cómo Ejecutar el Proyecto
-1. **Clonar o descargar** el repositorio.
-
-2. **Crear y activar** un entorno virtual.
-
-3. **Instalar las dependencias**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   El archivo `requirements.txt` se encuentran en la carpeta [deps](./deps) del proyecto.
+La catedra nos proporciono la simulacion de sala de emergencia, por lo que usamos la estrucutura Monticulo de minimos para almacenar a los pacientes a medida que entraban a la sala de mayor a menor nivel de riesgo (1 a 3). Asimismo implementamos una cola de prioridad para ver el orden en que se tenian que atender los pacientes, creamos el método especial __lt__ que nos sirvio para comparar en el Monticulo los niveles de riesgo y si estos coincidian utilizar como segundo criterio el orden de llegada que se asigna en la simulacion cuando llega un nuevo paciente a la sala.
 
 ---
 ## 🙎‍♀️🙎‍♂️Autores
 
-- Apellido y Nombre del primer integrante
-- Apellido y Nombre del primer integrante
+- Almirón, Maria Paz
+- Leiva, Giuliana
+- Saravia, Lucia
 
 ---
-
-> **Consejo**: Mantén el README **actualizado** conforme evoluciona el proyecto, y elimina (o añade) secciones según necesites. Esta plantilla es sólo un punto de partida general.

@@ -10,7 +10,6 @@ class MonticuloMin:
     def lista(self, cambio):
        self.__lista = cambio
 
-
     def infiltArriba(self, valor):
         while valor // 2 > 0:
           if self.lista[valor] < self.lista[valor // 2]:
@@ -47,6 +46,7 @@ class MonticuloMin:
                   return i * 2 + 1
 
     def eliminarMin(self):
+      '''Devuelve la raiz del monticulo y selecciona una nueva raiz'''
       valorSacado = self.lista[1]
       self.lista[1] = self.lista[self.tamanoActual]
       self.tamanoActual = self.tamanoActual - 1
