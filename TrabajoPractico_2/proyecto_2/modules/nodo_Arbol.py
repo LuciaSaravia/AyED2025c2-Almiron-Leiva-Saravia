@@ -1,9 +1,9 @@
-from abc import ABC, abstractmethod
+
 class NodoArbol:
     def __init__(self,clave,valor,izquierdo=None,derecho=None,
                                        padre=None):
-        self.__clave = clave
-        self.__cargaUtil = valor
+        self.__clave = clave #fecha
+        self.__valor = valor #temperatura
         self.__hijoIzquierdo = izquierdo
         self.__hijoDerecho = derecho
         self.__padre = padre
@@ -14,8 +14,8 @@ class NodoArbol:
         return self.__clave
     
     @property
-    def cargaUtil(self):
-        return self.__cargaUtil
+    def valor(self):
+        return self.__valor
     
     @property
     def hijoIzquierdo(self):
@@ -75,28 +75,11 @@ class NodoArbol:
 
     def reemplazarDatoDeNodo(self,clave,valor,hizq,hder):
         self.clave = clave
-        self.cargaUtil = valor
+        self.valor = valor
         self.hijoIzquierdo = hizq
         self.hijoDerecho = hder
         if self.tieneHijoIzquierdo():
             self.hijoIzquierdo.padre = self
         if self.tieneHijoDerecho():
             self.hijoDerecho.padre = self
-        
-
-class ArbolBinarioBusqueda(ABC):
-    @abstractmethod
-    def longitud(self):
-        raise NotImplementedError
-    
-    @abstractmethod
-    def __len__(self):
-        raise NotImplementedError
-    
-    @abstractmethod
-    def __iter__(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    def _agregar(self, clave, valor, nodoActual):
-        raise NotImplementedError
+     
