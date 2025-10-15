@@ -1,5 +1,6 @@
 from modules.nodo_Arbol import NodoArbol
 from datetime import datetime
+
 class AVL:
     def __init__(self):
         self.raiz = None
@@ -13,7 +14,7 @@ class AVL:
     
     def __iter__(self):
         return self.raiz.__iter__()
-    
+
     def agregar(self,clave,valor):
         if self.raiz:
             self._agregar(clave,valor,self.raiz)
@@ -95,28 +96,136 @@ class AVL:
                 rotRaiz.padre.hijoIzquierdo = nuevaRaiz
         nuevaRaiz.hijoDerecho = rotRaiz
         rotRaiz.padre = nuevaRaiz
-        rotRaiz.factorEquilibrio = rotRaiz.factorEquilibrio + 1 - min(nuevaRaiz.factorEquilibrio, 0)
-        nuevaRaiz.factorEquilibrio = nuevaRaiz.factorEquilibrio + 1 + max(rotRaiz.factorEquilibrio, 0)
+        rotRaiz.factorEquilibrio = rotRaiz.factorEquilibrio + 1 - min(nuevaRaiz.factorEquilibrio,0)
+        nuevaRaiz.factorEquilibrio = nuevaRaiz.factorEquilibrio + 1 + max( rotRaiz.factorEquilibrio,0)
 
-    # def imprimir(self, nodo=None, nivel=0):
-    #     if nodo is None:
-    #         nodo = self.araiz
-    #     if nodo.hijoDerecho:
-    #         self.imprimir(nodo.hijoDerecho, nivel + 1)
-    #     print(' ' * 4 * nivel + f'-> {nodo.clave} (FE={nodo.factorEquilibrio})')
-    #     if nodo.hijoIzquierdo:
-    #         self.imprimir(nodo.hijoIzquierdo, nivel + 1)
+    def obtener(self,clave):
+        if self.raiz:
+            res = self._obtener(clave,self.raiz)
+            if res:
+                return res.valor
+            else:
+                return None
+        else:
+            return None
 
+    def _obtener(self,clave,nodoActual):
+        if not nodoActual:
+            return None
+        elif nodoActual.clave == clave:
+            return nodoActual
+        elif clave < nodoActual.clave:
+            return self._obtener(clave,nodoActual.hijoIzquierdo)
+        else:
+            return self._obtener(clave,nodoActual.hijoDerecho)
+
+    def eliminar(self,clave):
+      if self.tamano > 1:
+         nodoAEliminar = self._obtener(clave,self.raiz)
+         if nodoAEliminar:
+             self.remover(nodoAEliminar)
+             self.tamano = self.tamano-1
+         else:
+             raise KeyError('Error, la clave no está en el árbol')
+      elif self.tamano == 1 and self.raiz.clave == clave:
+         self.raiz = None
+         self.tamano = self.tamano - 1
+      else:
+         raise KeyError('Error, la clave no está en el árbol')
+    
+    def empalmar(self):
+        if self.esHoja():
+            if self.esHijoIzquierdo():
+                self.padre.hijoIzquierdo = None
+            else:
+                self.padre.hijoDerecho = None
+        elif self.tieneAlgunHijo():
+            if self.tieneHijoIzquierdo():
+                if self.esHijoIzquierdo():
+                    self.padre.hijoIzquierdo = self.hijoIzquierdo
+                else:
+                    self.padre.hijoDerecho = self.hijoIzquierdo
+                    self.hijoIzquierdo.padre = self.padre
+            else:
+                if self.esHijoIzquierdo():
+                    self.padre.hijoIzquierdo = self.hijoDerecho
+                else:
+                    self.padre.hijoDerecho = self.hijoDerecho
+                    self.hijoDerecho.padre = self.padre
+
+    def encontrarSucesor(self):
+        suc = None
+        if self.tieneHijoDerecho():
+            suc = self.hijoDerecho.encontrarMin()
+        else:
+            if self.padre:
+                if self.esHijoIzquierdo():
+                    suc = self.padre
+                else:
+                    self.padre.hijoDerecho = None
+                    suc = self.padre.encontrarSucesor()
+                    self.padre.hijoDerecho = self
+        return suc
+
+    def encontrarMin(self):
+        actual = self
+        while actual.tieneHijoIzquierdo():
+            actual = actual.hijoIzquierdo
+        return actual
+
+    def remover(self,nodoActual):
+        if nodoActual.esHoja(): #hoja
+            if nodoActual == nodoActual.padre.hijoIzquierdo:
+                nodoActual.padre.hijoIzquierdo = None
+            else:
+                nodoActual.padre.hijoDerecho = None
+        elif nodoActual.tieneAmbosHijos(): #interior
+            suc = nodoActual.encontrarSucesor()
+            suc.empalmar()
+            nodoActual.clave = suc.clave
+            nodoActual.valor = suc.valor
+
+        else: # este nodo tiene un (1) hijo
+            if nodoActual.tieneHijoIzquierdo():
+                if nodoActual.esHijoIzquierdo():
+                    nodoActual.hijoIzquierdo.padre = nodoActual.padre
+                    nodoActual.padre.hijoIzquierdo = nodoActual.hijoIzquierdo
+                elif nodoActual.esHijoDerecho():
+                    nodoActual.hijoIzquierdo.padre = nodoActual.padre
+                    nodoActual.padre.hijoDerecho = nodoActual.hijoIzquierdo
+                else:
+                    nodoActual.reemplazarDatoDeNodo(nodoActual.hijoIzquierdo.clave,nodoActual.hijoIzquierdo.cargaUtil,nodoActual.hijoIzquierdo.hijoIzquierdo,nodoActual.hijoIzquierdo.hijoDerecho)
+            else:
+                if nodoActual.esHijoIzquierdo():
+                    nodoActual.hijoDerecho.padre = nodoActual.padre
+                    nodoActual.padre.hijoIzquierdo = nodoActual.hijoDerecho
+                elif nodoActual.esHijoDerecho():
+                    nodoActual.hijoDerecho.padre = nodoActual.padre
+                    nodoActual.padre.hijoDerecho = nodoActual.hijoDerecho
+                else:
+                       nodoActual.reemplazarDatoDeNodo(nodoActual.hijoDerecho.clave,nodoActual.hijoDerecho.valor,nodoActual.hijoDerecho.hijoIzquierdo,nodoActual.hijoDerecho.hijoDerecho)
+
+    def obtener_rango(self, clave_1, clave_2):
+        rango = []
+        for nodo in self:
+            if clave_1 <= nodo.clave<= clave_2:
+                rango.append(nodo.valor)
+        return rango
+    
+    
 if __name__ == "__main__":
     arbol = AVL()
     arbol.agregar(1, 26)
     arbol.agregar(2, 8)
-    arbol.agregar(3, 17)
+    arbol.agregar(9, 17)
     arbol.agregar(4, 5)
-    arbol.agregar(5, 23)
-    arbol.agregar(6, 1)
+    arbol.agregar(15, 23)
+    arbol.agregar(6, 14)
+    #print(arbol.raiz.clave)
+    #print(arbol.raiz.hijoDerecho.clave)
+    #print(arbol.raiz.hijoIzquierdo.clave)
+    print('-'*20)
+
+    rango_obtenido = arbol.obtener_rango(4, 15)
+    print(rango_obtenido)
     
-    
-    print(arbol.raiz.clave)
-    print(arbol.raiz.hijoDerecho.clave)
-    print(arbol.raiz.hijoIzquierdo.clave)
