@@ -29,7 +29,7 @@ def min_temp_rango(self, fecha1, fecha2 ):
 def temp_extremos_rangos(self, fecha1, fecha2):
     '''devuelve la temperatura mínima y máxima entre los rangos fecha1 y fecha2 inclusive (fecha1 < fecha2)'''
     lista = self.arbol_obtener_rango(fecha1, fecha2)
-    return(min(lista), max(lista))
+    return (min(lista), max(lista))
 
 def borrar_temperatura(self, fecha):
     '''recibe una fecha y elimina del árbol la medición correspondiente a esa fecha'''
