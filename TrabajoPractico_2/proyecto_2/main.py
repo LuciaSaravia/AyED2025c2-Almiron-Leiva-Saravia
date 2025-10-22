@@ -39,11 +39,10 @@ def implementacion():
     print("Temperatura minima entre esas fechas: ", db.min_temp_rango(buscar_f1, buscar_f2))
     print("Temperaturas extremas (min, max) entre esas fechas: ", db.temp_extremos_rangos(buscar_f1, buscar_f2))
 
-   # NO ANDA CORREGIR
-   # borrar_f=datetime.strptime("10/04/2025","%d/%m/%Y") #probe con una fecha que estaba
-    #print(f"Borrando la temperatura del dia {borrar_f.date()}") 
-    #db.borrar_temperatura(borrar_f)
-    #print("Cantidad de muestras luego de borrar:", db.cantidad_muestras())
+    borrar_f=datetime.strptime("10/04/2025","%d/%m/%Y") #probe con una fecha que estaba
+    print(f"Borrando la temperatura del dia {borrar_f.date()}") 
+    db.borrar_temperatura(borrar_f)
+    print("Cantidad de muestras luego de borrar:", db.cantidad_muestras())
 
 if __name__ == "__main__":
     implementacion()

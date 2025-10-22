@@ -49,6 +49,14 @@ class NodoArbol:
     def factorEquilibrio(self, nuevo_factor):
         self.__factorEquilibrio = nuevo_factor
     
+    @clave.setter
+    def clave(self, nueva_clave):
+        self.__clave = nueva_clave
+    
+    @valor.setter
+    def valor(self, nuevo_valor):
+        self.__valor = nuevo_valor
+    
     def tieneHijoIzquierdo(self):
         return self.hijoIzquierdo
 
@@ -83,6 +91,36 @@ class NodoArbol:
         if self.tieneHijoDerecho():
             self.hijoDerecho.padre = self
 
+    def encontrarSucesor(self):
+        return self.hijoDerecho.encontrarMin()
+        return suc
+    
+    def encontrarMin(self):
+        actual = self
+        while actual.tieneHijoIzquierdo():
+            actual = actual.hijoIzquierdo
+        return actual
+    
+    def empalmar(self):
+        if self.esHoja():
+            if self.esHijoIzquierdo():
+                self.padre.hijoIzquierdo = None
+            else:
+                self.padre.hijoDerecho = None
+        elif self.tieneAlgunHijo():
+            if self.tieneHijoIzquierdo():
+                if self.esHijoIzquierdo():
+                    self.padre.hijoIzquierdo = self.hijoIzquierdo
+                else:
+                    self.padre.hijoDerecho = self.hijoIzquierdo
+                    self.hijoIzquierdo.padre = self.padre
+            else:
+                if self.esHijoIzquierdo():
+                    self.padre.hijoIzquierdo = self.hijoDerecho
+                else:
+                    self.padre.hijoDerecho = self.hijoDerecho
+                    self.hijoDerecho.padre = self.padre
+    
     def __iter__(self):
         if self:
             if self.tieneHijoIzquierdo():

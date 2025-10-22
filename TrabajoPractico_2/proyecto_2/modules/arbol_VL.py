@@ -120,59 +120,21 @@ class AVL:
             return self._obtener(clave,nodoActual.hijoDerecho)
 
     def eliminar(self,clave):
-      if self.tamano > 1:
-         nodoAEliminar = self._obtener(clave,self.raiz)
-         if nodoAEliminar:
-             self.remover(nodoAEliminar)
-             self.tamano = self.tamano-1
-         else:
-             raise KeyError('Error, la clave no está en el árbol')
-      elif self.tamano == 1 and self.raiz.clave == clave:
-         self.raiz = None
-         self.tamano = self.tamano - 1
-      else:
-         raise KeyError('Error, la clave no está en el árbol')
+        if self.tamano > 1:
+            nodoAEliminar = self._obtener(clave,self.raiz)
+            if nodoAEliminar:
+                self.remover(nodoAEliminar)
+                self.tamano = self.tamano-1
+            else:
+                raise KeyError('Error, la clave no está en el árbol')
     
-    def empalmar(self):
-        if self.esHoja():
-            if self.esHijoIzquierdo():
-                self.padre.hijoIzquierdo = None
-            else:
-                self.padre.hijoDerecho = None
-        elif self.tieneAlgunHijo():
-            if self.tieneHijoIzquierdo():
-                if self.esHijoIzquierdo():
-                    self.padre.hijoIzquierdo = self.hijoIzquierdo
-                else:
-                    self.padre.hijoDerecho = self.hijoIzquierdo
-                    self.hijoIzquierdo.padre = self.padre
-            else:
-                if self.esHijoIzquierdo():
-                    self.padre.hijoIzquierdo = self.hijoDerecho
-                else:
-                    self.padre.hijoDerecho = self.hijoDerecho
-                    self.hijoDerecho.padre = self.padre
-
-    def encontrarSucesor(self):
-        suc = None
-        if self.tieneHijoDerecho():
-            suc = self.hijoDerecho.encontrarMin()
+        elif self.tamano == 1 and self.raiz.clave == clave:
+            self.raiz = None
+            self.tamano = self.tamano - 1
         else:
-            if self.padre:
-                if self.esHijoIzquierdo():
-                    suc = self.padre
-                else:
-                    self.padre.hijoDerecho = None
-                    suc = self.padre.encontrarSucesor()
-                    self.padre.hijoDerecho = self
-        return suc
-
-    def encontrarMin(self):
-        actual = self
-        while actual.tieneHijoIzquierdo():
-            actual = actual.hijoIzquierdo
-        return actual
-
+            raise KeyError('Error, la clave no está en el árbol')
+        self.reequilibrar(nodoAEliminar)
+        
     def remover(self,nodoActual):
         if nodoActual.esHoja(): #hoja
             if nodoActual == nodoActual.padre.hijoIzquierdo:
@@ -228,4 +190,5 @@ if __name__ == "__main__":
 
     rango_obtenido = arbol.obtener_rango(4, 15)
     print(rango_obtenido)
-    
+    abst=arbol.eliminar(9)
+    print(abst)

@@ -31,9 +31,9 @@ class Temperatura_DB():
         lista = self.arbol.obtener_rango(fecha1, fecha2)
         return (min(lista), max(lista))
 
-    def borrar_temperatura(self, fecha): 
+    def borrar_temperatura(self, fecha): #probada
         '''recibe una fecha y elimina del árbol la medición correspondiente a esa fecha'''
-        return self.arbol.eliminar()
+        return self.arbol.eliminar(fecha)
 
     def devolver_temperaturas(self, fecha1, fecha2): #probada
         '''devuelve un listado de las mediciones de temperatura en el rango recibido'''
