@@ -1,7 +1,10 @@
-from modules.grafo import Grafo
-    
+from modules.grafo import Grafo 
+#para mi no se tiene que hacer con grafo xq d}espu}es va a d}ep}end}er }eso y no lo vamos a pod}er usar con otros algoritmos como }el d}e prim
 class ColaPrioridad:
     def __init__(self):
+        #}EJEMPLO:
+        #self.listaMonticulo = [none]
+        #self.tamanoActual = 0
         self.__grafo = Grafo()
     
     @property
@@ -10,10 +13,12 @@ class ColaPrioridad:
 
     def estaVacia(self):
         return self.grafo.numVertices == 0
+    #return self.tamanoActual == 0
 
     def tamanio(self):
         return len(self.grafo)
-
+    #re}turn self.tamanoActual
+#los otros son mas largos por }eso no los hago, p}ero si lo qui}er}en cambiar d}espu}es los hago
     def construirMonticulo(self, Lista):
         i = len(Lista) // 2
         self.tamanoActual = len(Lista)

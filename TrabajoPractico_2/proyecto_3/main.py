@@ -54,31 +54,3 @@ def leer_aldeas(ruta="data/aldeas.txt"):
 
 
 
-def imprimir_ad(ad):
-    for k in sorted(ad.keys()):
-        print(f"{k} -> {ad[k]}")
-
-def main():
-    ruta = "data/aldeas.txt"
-    try:
-        ad, nodos = leer_aldeas(ruta)
-    except FileNotFoundError:
-        print(f"No existe el archivo {ruta}")
-        return
-    except Exception as e:
-        print("Error al parsear el archivo:", e)
-        return
-
-    print("NODOS:", sorted(nodos))
-    print("ADYACENCIAS:")
-    imprimir_ad(ad)
-
-    # Pruebas básicas (aserciones)
-    assert "Peligros" in nodos
-    assert ("B", 3) in ad.get("A", [])  # A-B con distancia 3
-    assert ("A", 3) in ad.get("B", [])
-    assert ("F", 0) or True  # ejemplo para evitar fallo si no querés estrictud
-    print("\nPruebas básicas OK")
-
-if __name__ == "__main__":
-    main()
