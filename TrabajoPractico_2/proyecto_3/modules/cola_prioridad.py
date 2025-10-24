@@ -1,72 +1,86 @@
-from modules.grafo import Grafo 
-#para mi no se tiene que hacer con grafo xq d}espu}es va a d}ep}end}er }eso y no lo vamos a pod}er usar con otros algoritmos como }el d}e prim
+from modules.grafo import Vertice
+
 class ColaPrioridad:
     def __init__(self):
-        #}EJEMPLO:
-        #self.listaMonticulo = [none]
-        #self.tamanoActual = 0
-        self.__grafo = Grafo()
+        self.listaMonticulo = [None]
+        self.__tamanoActual = 0    
     
     @property
-    def grafo (self):
-        return self.__grafo
+    def tamanoActual(self):
+        return self.__tamanoActual
+    
+    @tamanoActual.setter
+    def tamanoActual(self, tamano_nuevo):
+        self.__tamanoActual = tamano_nuevo
 
     def estaVacia(self):
-        return self.grafo.numVertices == 0
-    #return self.tamanoActual == 0
+        return self.tamanoActual == 0
 
     def tamanio(self):
-        return len(self.grafo)
-    #re}turn self.tamanoActual
-#los otros son mas largos por }eso no los hago, p}ero si lo qui}er}en cambiar d}espu}es los hago
-    def construirMonticulo(self, Lista):
-        i = len(Lista) // 2
-        self.tamanoActual = len(Lista)
-        self.listaMonticulo = [0] + Lista[:]
+        return self.tamanoActual
+
+    def construirMonticulo(self, distancias):
+        i = len(distancias) // 2
+        self.tamanoActual = len(distancias)
+        self.listaMonticulo = [None] + distacias[:]
         while (i > 0):
             self.infiltAbajo(i)
             i = i - 1
 
     def eliminarMin(self):
         '''Devuelve la raiz del monticulo y selecciona una nueva raiz'''
-        valorSacado = self.lista[1]
-        self.lista[1] = self.lista[self.tamanoActual]
+        valorSacado = self.listaMonticulo[1]
+        self.listaMonticulo[1] = self.listaMonticulo[self.tamanoActual]
         self.tamanoActual = self.tamanoActual - 1
-        self.lista.pop()
+        self.listaMonticulo.pop()
         self.infiltAbajo(1)
         return valorSacado
 
     def infiltArriba(self, valor):
             while valor // 2 > 0:
-                if self.lista[valor] < self.lista[valor // 2]:
-                    tmp = self.lista[valor // 2]
-                    self.lista[valor // 2] = self.lista[valor]
-                    self.lista[valor] = tmp
-                elif self.lista[valor] < self.lista[(valor //2) + 1]:
-                    tmp = self.lista[(valor//2)+1]
-                    self.lista[(valor//2)+1] = self.lista[valor]
-                    self.lista[valor] = tmp
+                if self.listaMonticulo[valor] < self.listaMonticulo[valor // 2]:
+                    tmp = self.listaMonticulo[valor // 2]
+                    self.listaMonticulo[valor // 2] = self.listaMonticulo[valor]
+                    self.listaMonticulo[valor] = tmp
+                elif self.listaMonticulo[valor] < self.listaMonticulo[(valor //2) + 1]:
+                    tmp = self.listaMonticulo[(valor//2)+1]
+                    self.listaMonticulo[(valor//2)+1] = self.listaMonticulo[valor]
+                    self.listaMonticulo[valor] = tmp
             valor = valor // 2
 
     def infiltAbajo(self,i):
             while (i * 2) <= self.tamanoActual:
                 hm = self.hijoMin(i)
-                if self.lista[i] > self.lista[hm]:
-                    tmp = self.lista[i]
-                    self.lista[i] = self.lista[hm]
-                    self.lista[hm] = tmp
+                if self.listaMonticulo[i] > self.listaMonticulo[hm]:
+                    tmp = self.listaMonticulo[i]
+                    self.listaMonticulo[i] = self.listaMonticulo[hm]
+                    self.listaMonticulo[hm] = tmp
                 i = hm
 
-    def decrementarClave(self, valor, nuevaDistancia): #chequear esto
-        vertice = self.grafo.obtenerVertice(valor)
+    def hijoMin(self,i):
+          if i * 2 + 1 > self.tamanoActual:
+              return i * 2
+          else:
+              if self.listaMonticulo[i*2] < self.listaMonticulo[i*2+1]:
+                  return i * 2
+              else:
+                  return i * 2 + 1
+              
+    def decrementarClave(self, vertice: Vertice, nueva_ponderacion): 
         if vertice is None:
             return
-        vertice.asignarDistancia(nuevaDistancia) #se asigna nueva distancia
+        vertice.asignarDistancia(nueva_ponderacion) 
         for i in range(1, self.tamanoActual + 1):
-            dist, v = self.listaMonticulo[i]
+            dist, v = self.listaMonticuloMonticulo[i]
             if v is vertice:
-                self.listaMonticulo[i] = (nuevaDistancia, v)
+                self.listaMonticuloMonticulo[i] = (nueva_ponderacion, v)
                 self.infiltArriba(i)
                 break
         
-        
+if __name__=='__main__':
+    listaMonticulo = [1, 5, 6, 14, 9, 27, 31, 2]
+    cp = ColaPrioridad()
+    cp.construirMonticulo(listaMonticulo)
+    print(cp.tamanoActual)
+    print(cp.eliminarMin())
+    print(cp.listaMonticulo)

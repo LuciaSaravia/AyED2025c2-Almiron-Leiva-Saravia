@@ -1,7 +1,8 @@
 class Vertice:
     def __init__(self, nombre_aldea: str):
         self.__id = nombre_aldea
-        self.__distancia = None
+        self.__ponderacion = 0
+        self.__distancia = 0
         self.__predecesor = None
         self.conectadoA = {}
     
@@ -12,10 +13,22 @@ class Vertice:
     @id.setter
     def id(self, id_nuevo):
         self.__id = id_nuevo
+    
+    @property
+    def ponderacion (self):
+        return self.__ponderacion
+    
+    @ponderacion.setter
+    def ponderacion(self, nueva_ponderacion):
+        self.__ponderacion = nueva_ponderacion
 
     @property
     def distancia (self):
         return self.__distancia
+    
+    @distancia.setter
+    def distancia(self, d):
+        self.__distancia = d
     
     @property
     def predecesor (self):
@@ -25,31 +38,28 @@ class Vertice:
     def predecesor(self, predecesor):
         self.__predecesor = predecesor
 
-    def agregarVecino(self,vecino,distancia=0):
-        self.conectadoA[vecino] = distancia # distancia = ponderacion
+    def agregar_vecino(self,vecino,ponderacion):
+        self.conectadoA[vecino] = ponderacion 
 
     def __str__(self):
         return str(self.id) + ' conectadoA: ' + str([x.id for x in self.conectadoA])
 
-    def obtenerVecinos(self):
+    def obtener_vecinos(self):
         return self.conectadoA.keys()
 
     def obtener(self):
         return self.id
 
-    def obtenerPonderacion(self,vecino): 
+    def obtener_ponderacion(self,vecino): 
         return self.conectadoA[vecino]
     
-    def obtenerDistancia(self, vertice = None):
-        if not vertice:
-            return self.distancia
-        else:
-            return self.conectadoA[vertice]
+    def obtener_distancia(self):
+        return self.distancia
     
-    def asignarDistancia(self, distancia):
+    def asignar_distancia(self, distancia):
         self.distancia = distancia 
     
-    def asignarVecinoPredecesor(self, vecinoAnterior):
+    def asignar_vecino_predecesor(self, vecinoAnterior):
         self.predecesor = vecinoAnterior
 
     
@@ -81,12 +91,12 @@ class Grafo:
     def __contains__(self,n):
         return n in self.listaVertices
 
-    def agregarArista(self, origen, destino, costo = 0):
+    def agregarArista(self, origen, destino, costo = 0): #costo = ponderacion
         if origen not in self.listaVertices:
             nuevo_vertice = self.agregarVertice(origen)
         if destino not in self.listaVertices:
             nuevo_vertice = self.agregarVertice(destino)
-        self.listaVertices[origen].agregarVecino(self.listaVertices[destino], costo)
+        self.listaVertices[origen].agregar_vecino(self.listaVertices[destino], costo)
 
     def obtenerVertices(self):
         return self.listaVertices.keys()
