@@ -53,14 +53,15 @@ class Vertice:
     def obtener_ponderacion(self,vecino): 
         return self.conectadoA[vecino]
     
-    def obtener_distancia(self):
-        return self.distancia
+    #No son necesarias las funciones ya que utilizamos getter y setter
+    # def obtener_distancia(self):
+    #     return self.distancia
     
-    def asignar_distancia(self, distancia):
-        self.distancia = distancia 
+    # def asignar_distancia(self, distancia):
+    #     self.distancia = distancia 
     
-    def asignar_vecino_predecesor(self, vecinoAnterior):
-        self.predecesor = vecinoAnterior
+    # def asignar_vecino_predecesor(self, vecinoAnterior):
+    #     self.predecesor = vecinoAnterior
 
     
 class Grafo:

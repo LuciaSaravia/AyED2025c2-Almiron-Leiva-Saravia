@@ -22,7 +22,7 @@ class ColaPrioridad:
     def construirMonticulo(self, distancias):
         i = len(distancias) // 2
         self.tamanoActual = len(distancias)
-        self.listaMonticulo = [None] + distacias[:]
+        self.listaMonticulo = [None] + distancias[:]
         while (i > 0):
             self.infiltAbajo(i)
             i = i - 1
@@ -38,11 +38,11 @@ class ColaPrioridad:
 
     def infiltArriba(self, valor):
             while valor // 2 > 0:
-                if self.listaMonticulo[valor] < self.listaMonticulo[valor // 2]:
+                if self.listaMonticulo[valor][0] < self.listaMonticulo[valor // 2][0]:
                     tmp = self.listaMonticulo[valor // 2]
                     self.listaMonticulo[valor // 2] = self.listaMonticulo[valor]
                     self.listaMonticulo[valor] = tmp
-                elif self.listaMonticulo[valor] < self.listaMonticulo[(valor //2) + 1]:
+                elif self.listaMonticulo[valor][0] < self.listaMonticulo[(valor //2) + 1][0]:
                     tmp = self.listaMonticulo[(valor//2)+1]
                     self.listaMonticulo[(valor//2)+1] = self.listaMonticulo[valor]
                     self.listaMonticulo[valor] = tmp
@@ -51,7 +51,7 @@ class ColaPrioridad:
     def infiltAbajo(self,i):
             while (i * 2) <= self.tamanoActual:
                 hm = self.hijoMin(i)
-                if self.listaMonticulo[i] > self.listaMonticulo[hm]:
+                if self.listaMonticulo[i][0] > self.listaMonticulo[hm][0]:
                     tmp = self.listaMonticulo[i]
                     self.listaMonticulo[i] = self.listaMonticulo[hm]
                     self.listaMonticulo[hm] = tmp
@@ -61,7 +61,7 @@ class ColaPrioridad:
           if i * 2 + 1 > self.tamanoActual:
               return i * 2
           else:
-              if self.listaMonticulo[i*2] < self.listaMonticulo[i*2+1]:
+              if self.listaMonticulo[i*2][0] < self.listaMonticulo[i*2+1][0]:
                   return i * 2
               else:
                   return i * 2 + 1
@@ -69,14 +69,16 @@ class ColaPrioridad:
     def decrementarClave(self, vertice: Vertice, nueva_ponderacion): 
         if vertice is None:
             return
-        vertice.asignarDistancia(nueva_ponderacion) 
+        vertice.distancia = nueva_ponderacion
         for i in range(1, self.tamanoActual + 1):
             dist, v = self.listaMonticuloMonticulo[i]
             if v is vertice:
                 self.listaMonticuloMonticulo[i] = (nueva_ponderacion, v)
                 self.infiltArriba(i)
                 break
-        
+    def __iter__(self):
+        return iter(self.listaMonticulo[1:]) 
+    
 if __name__=='__main__':
     listaMonticulo = [1, 5, 6, 14, 9, 27, 31, 2]
     cp = ColaPrioridad()
