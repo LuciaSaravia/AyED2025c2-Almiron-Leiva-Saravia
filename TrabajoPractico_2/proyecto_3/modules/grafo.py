@@ -47,8 +47,8 @@ class Vertice:
     def obtener_vecinos(self):
         return self.conectadoA.keys()
 
-    def obtener(self):
-        return self.id
+    # def obtener(self):
+    #     return self.id
 
     def obtener_ponderacion(self,vecino): 
         return self.conectadoA[vecino]

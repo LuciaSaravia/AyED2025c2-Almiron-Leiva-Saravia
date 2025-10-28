@@ -1,7 +1,6 @@
 import sys
-from modules import grafo
 from modules.cola_prioridad import ColaPrioridad
-from modules.grafo import Grafo, Vertice
+from modules.grafo import Grafo
 
 
 def prim(G: Grafo,inicio):
@@ -25,7 +24,7 @@ def prim(G: Grafo,inicio):
                 verticeSiguiente.predecesor = verticeActual # se actualiza el predecesor que es el actual
                 verticeSiguiente.distancia = nuevoCosto #se ajusta la distancia del verticeSiguiente
                 cp.decrementarClave(verticeSiguiente, nuevoCosto) #se decrementa la clave del siguiente vertice en la cp
-                print(f"    Actualizado: {verticeActual.obtener()} -> {verticeSiguiente.obtener()} con costo {nuevoCosto}")
+                print(f"    Actualizado: {verticeActual.id} -> {verticeSiguiente.id} con costo {nuevoCosto}")
                 #hay que reconstruir para eso nos fijamos en los predecesores y calcular el costo minimo que es la suma de las distancias
 
 def distanciatotal(grafo: Grafo): # Suma las distancias del árbol de expansión mínima
@@ -34,7 +33,7 @@ def distanciatotal(grafo: Grafo): # Suma las distancias del árbol de expansión
         if v.predecesor is not None:
             total += v.distancia
     return total
-#
+
 if __name__=='__main__':
     g = Grafo ()
     #ejemplo con numeros
