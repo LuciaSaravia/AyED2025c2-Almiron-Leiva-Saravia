@@ -1,76 +1,45 @@
 from modules.grafo import Grafo
-from modules.algoritmo_prim import prim, distanciaTotal
+from modules.algoritmo_prim import prim, distanciaTotal, recorridoMensajes
 
 #funcion para leer el archivo de aldeas:
-def leer_aldeas(ruta="data/aldeas.txt"):
-    ad={} #lista de adyacencias del grafo, aldeas conectadas entre si
-    nodos=set()
+def leer_aldeas(ruta):
+    grafo = Grafo()
     with open(ruta, "r") as archi:
         for linea in archi:
             linea=linea.strip()
             if not linea:
                 continue
             partes=[p.strip() for p in linea.split(",") if p.strip() != '']
+            if grafo.obtenerVertice(partes[0]) is None:
+                grafo.agregarVertice(partes[0])
 
-            #caso 1: solo nombre de aldea sin conexiones
-            if len(partes)==1:
-                nodo=partes[0]
-                nodos.add(nodo)
-                if nodo not in ad:
-                    ad[nodo]=[]
-                continue
+            grafo.agregarArista(partes[0], partes[1], int(partes[2]))
+    return grafo
 
-            #caso 2: aldea con conexiones arista(origen, destino [, distancia])
-            origen=partes[0]
-            destino=partes[1]
-            nodos.add(origen)
-            nodos.add(destino)
+#implementacion
 
-            if origen not in ad:
-                ad[origen]=[]
-            if destino not in ad:
-                ad[destino]=[]
+grafo = leer_aldeas("data/aldeas.txt")
+v_inicio = grafo.obtenerVertice('Peligros')
+prim(grafo, v_inicio)
+aldeas_ord = sorted(grafo.obtenerVertices())
+vertices_p_s = recorridoMensajes(grafo)
 
-
-            if len(partes)>=3:
-                s=partes[2].replace(',','.')
-                try:
-                    distancia=int(s)
-                except ValueError:
-                    try:
-                        distancia=int(round(float(s)))
-                    except ValueError:
-                            raise ValueError(f"La distancia no valida en la linea: {linea}")
-            else:
-                distancia= 0 #distancia por defecto si no se especifica 
-
-            #grafo no dirigido agrego las aristas en ambos sentidos y evito duplicados
-            if (destino, distancia) not in ad[origen]:
-                ad[origen].append((destino, distancia))
-            if (origen, distancia) not in ad[destino]:
-                ad[destino].append((origen, distancia))
-    for n in nodos:
-        if n not in ad:
-            ad[n]=[]
-    return ad, nodos
-
-#funcion para crear el grafo:
-def crear_grafo(ad):
-    g=Grafo()
-    #crear vertices
-    for v in ad.keys():
-        if g.obtenerVertice (v) is None:
-            g.agregarVertice(v) 
-    #crear aristas
-    for origen, vecinos in ad.items():
-        for destino, distancia in vecinos:
-            if origen== '' or destino=='':
-                continue
-            g.agregarArista(origen, destino, distancia)
-    return g
-
-
-
-
-
-
+print("\n --Resultados del algortimo--")
+print("\n --Listas de Aldeas--")
+for aldea in aldeas_ord:
+    print(aldea)
+print(' ')
+print('\n Recorrido del mensaje en la aldea: ')
+for vertice in vertices_p_s:
+    print(f'Aldea: {vertice[0]} ')
+    if not vertice[1]:
+        print(f'Aldea origen')
+    else:   
+        print(f'Aldea predecesora: {vertice[1]} ')
+    if not vertice[2]:
+        print('No tiene sucesores')
+    else:
+        print(f'Aldeas sucesoras {vertice[2]}')
+    print('-'*40)
+    print('  '*40)
+print(f'\n la suma de todas las palomas desde cada palomar es de {distanciaTotal(grafo)}')

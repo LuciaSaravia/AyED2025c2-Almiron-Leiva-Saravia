@@ -1,45 +1,14 @@
-# 🐍Nombre del proyecto (darle un nombre significativo) 
+# 🐍Proyecto 3 - "Palomas Mensajeras"
+En este proyecto se nos solicitó hallar la manera más eficiente (la menor suma total de distancias) de llevar un mensaje desde la aldea "Peligros" hasta el resto de las aldea, de manera tal que cada una de ellas reciba el mensaje solo una vez y puedan enviar réplicas a aldeas vecinas. A su vez, se nos pidió exponer la menor suma de todas las distancias recorridas por todas las palomas enviadas desde cada palomar, así como, exhibir el nombre de las aldeas en orden alfabético, y por último, indicar de qué vecina debería recibir la noticia, y a qué vecinas debería enviar réplicas.
 
-Breve descripción del proyecto:
 
-Ejemplo: “Este es un script en el que se comparan algoritmos de ordenamiento. Permite [describir funcionalidades principales].
-
----
 ## 🏗Arquitectura General
+Utilizamos la estructura "grafo" que se trata de un árbol de expasión mínima, con raíz en la aldea "Peligros". Para esto, creamos las clases "Vertice" y "Grafo" que presentan diferentes funciones, tales como: agregarVecinos, obtenerVecinos, obtenerPonderación, agregarVertice, obtenerVertices, entre otras. Esto nos permitió implementar el algoritmo "prim", el cual nos ayudo para visualizar el recorrido que hicieron las palomas desde la aldea de origen hasta las demás aldeas, teniendo en cuenta la ponderación que hay entre ellas. Asimismo, implementamos las funciones distanciaTotal y recorridoMensajes para obtener la disticia total que realizaron las palomas desde "Peligros", así como también, el orden en el que lo hicieron.
 
-Explica brevemente cómo está organizado el código (funciones y/o clases)
 
-Las gráficas de los resultados están disponible en la carpeta [data](./data) del proyecto.
-
-El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
-
----
-## 📑Dependencias
-
-1. **Python 3.x**
-2. **matplotlib** (`pip install matplotlib`)
-3. listar dependencias principales
-4. Dependencias listadas en requierements.txt
-
----
-## 🚀Cómo Ejecutar el Proyecto
-1. **Clonar o descargar** el repositorio.
-
-2. **Crear y activar** un entorno virtual.
-
-3. **Instalar las dependencias**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   El archivo `requirements.txt` se encuentran en la carpeta [deps](./deps) del proyecto.
-
----
 ## 🙎‍♀️🙎‍♂️Autores
 
 - Almirón Spahn, Maria Paz
 - Leiva, Giuliana
 - Saravia, Lucia
 
----
-
-> **Consejo**: Mantén el README **actualizado** conforme evoluciona el proyecto, y elimina (o añade) secciones según necesites. Esta plantilla es sólo un punto de partida general.

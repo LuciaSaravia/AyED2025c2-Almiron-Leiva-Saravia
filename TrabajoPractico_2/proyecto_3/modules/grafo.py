@@ -30,10 +30,10 @@ class Vertice:
         self.__predecesor = predecesor
 
     def agregarVecino(self,vecino,distancia=0):
-        self.conectadoA[vecino] = distancia # distancia = ponderacion
+        self.conectadoA[vecino] = distancia
 
     def __str__(self):
-        return str(self.id) + ' conectadoA: ' + str([x.id for x in self.conectadoA])
+        return str(self.id) 
 
     def obtenerVecinos(self):
         return self.conectadoA.keys()
@@ -59,13 +59,13 @@ class Grafo:
         if nombre_Aldea not in self.listaVertices:
             self.__numVertices += 1
             nuevoVertice = Vertice(nombre_Aldea)
-            self.listaVertices[nombre_Aldea] = nuevoVertice
+            self.listaVertices[nombre_Aldea] = nuevoVertice #el diccionario listaVertices su clave es el nombre de la aldea y su valor es el vertice de tipo Vertice
             return nuevoVertice
         return self.listaVertices[nombre_Aldea]
 
-    def obtenerVertice(self,n):
-        if n in self.listaVertices:
-            return self.listaVertices[n]
+    def obtenerVertice(self,nombre_aldea):
+        if nombre_aldea in self.listaVertices:
+            return self.listaVertices[nombre_aldea] # devuelve el vertice que corresponde a esa clave
         else:
             return None
 
@@ -74,15 +74,14 @@ class Grafo:
 
     def agregarArista(self, origen, destino, costo = 0):
         if origen not in self.listaVertices:
-            nuevo_vertice = self.agregarVertice(origen)
+            self.agregarVertice(origen)
         if destino not in self.listaVertices:
-            nuevo_vertice = self.agregarVertice(destino)
-        #tenemos que agregar la arista en ambos sentidos xq es un grafo no dirigido 
-        self.listaVertices[origen].agregarVecino(self.listaVertices[destino], costo)
-        # self.listaVertices[destino].agregarVecino(self.listaVertices[origen], costo) No se deberia guardar como vecino sino como predecesor
+            self.agregarVertice(destino)
+        self.listaVertices[origen].agregarVecino(self.listaVertices[destino], costo) #conecta el origen con el destino
+        
 
     def obtenerVertices(self):
-        return self.listaVertices.keys()
+        return self.listaVertices.keys() #devuelve el nombre de los vertices
 
     def __iter__(self):
         return iter(self.listaVertices.values())
