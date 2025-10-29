@@ -1,5 +1,5 @@
 from modules.grafo import Grafo
-from modules.algoritmo_prim import prim
+from modules.algoritmo_prim import prim, distanciaTotal
 
 #funcion para leer el archivo de aldeas:
 def leer_aldeas(ruta="data/aldeas.txt"):
