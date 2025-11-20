@@ -40,7 +40,11 @@ class Paciente:
         cad += self.__apellido + '\t -> '
         cad += str(self.__riesgo) + '-' + self.__descripcion
         return cad
-    
+
+#Para que el Montículo de Mínimo pueda ordenar a los pacientes, necesita que la clase Paciente sepa cómo compararse con otro paciente, para eso implementamos el método __lt__, que implementa dos criterios de comparación:
+#1. El paciente con menor nivel de riesgo (1 es más grave que 2, etc) tiene mayor prioridad
+#2. Si dos pacientes tienen el mismo nivel de riesgo, el que llegó primero tiene mayor prioridad
+
     def __lt__(self, otro_paciente):
         '''Permite aplicar el segundo criterio para la cola de prioridad'''
         if self.riesgo != otro_paciente.riesgo: #si los riesgos son distintos va a pasar el menor (1)

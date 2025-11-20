@@ -1,8 +1,11 @@
 from modules.monticulo_min import MonticuloMin
 from modules.paciente import Paciente
+#Cola de prioridad: cada elemento tiene una prioridad asociada, y los elementos con mayor prioridad se atienden/eliminan antes 
 class ColaPrioridad:
     def __init__(self):
-        self.__monticulo = MonticuloMin()
+        self.__monticulo = MonticuloMin() #para implementar eficientemente la cola de prioridad usamos un monticulo de minimo
+
+#Monticulo de minimo: estructura de datos en forma de arbol binario completo donde el valor de cada nodo es menor o igual que el de sus hijos. El elemento mínimo de todo el montículo siempre se encuentra en la raíz. Permite insertar y eliminar el mínimo en un tiempo muy eficiente, generalmente O(log n)
 
     @property
     def monticulo(self):

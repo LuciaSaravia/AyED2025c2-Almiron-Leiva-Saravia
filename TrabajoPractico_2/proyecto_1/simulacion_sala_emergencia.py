@@ -12,7 +12,7 @@ import random
 n = 20  # cantidad de ciclos de simulación
 
 cola_de_espera = ColaPrioridad()
-orden_llegada = 0 # se crea una variable para saber que paiente llego primero y ordenar como segundo criterio
+orden_llegada = 0 # se crea una variable para saber que paciente llego primero y ordenar como segundo criterio
 # Ciclo que gestiona la simulación
 for i in range(n):
     # Fecha y hora de entrada de un paciente

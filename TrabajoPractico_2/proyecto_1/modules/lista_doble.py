@@ -12,3 +12,7 @@ class ListaDobleEnlazada:
             self.__cola = nuevo_nodo
         else:
             nuevo_nodo.siguiente = self.__cabeza
+
+#Si hubieramos usado esta estructura en lugar del monticulo de minimo, para implementar la cola de prioridad, tendriamos que recorrer toda la lista (SI ESTA DESORDENADA) para encontrar el paciente con mayor prioridad cada vez que querriamos atender a un paciente, lo cual seria ineficiente (O(n) en lugar de O(log n) con el monticulo)
+
+#Aunque la lista este ordenada, seguiria siendo ineficiente, ya que para insertar un nuevo paciente en la posicion correcta, tendriamos que recorrer la lista hasta encontrar la posicion correcta (O(n) en lugar de O(log n) con el monticulo)
