@@ -11,7 +11,7 @@ class ColaPrioridad:
     def monticulo(self):
         return self.__monticulo
     
-    def agregar_nuevo_paciente(self, paciente_nuevo):
+    def agregar_nuevo_paciente(self, paciente_nuevo): #para que sea generico deberia ser: (self, elemento) o algo asi, que no necesariamente sea un paciente asi podemos usar la cola de prioridad para otros fines
         '''Se agregar un nuevo paciente del tipo Paciente en el monticulo'''
         if not isinstance(paciente_nuevo, Paciente):
             raise ValueError('El objeto debe ser tipo Paciente')

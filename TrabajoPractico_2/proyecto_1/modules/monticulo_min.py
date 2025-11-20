@@ -38,10 +38,10 @@ class MonticuloMin:
               i = hm
 
     def hijoMin(self,i): #encuentra y devuelve el hijo menor de un nodo
-          if i * 2 + 1 > self.tamanoActual:
-              return i * 2
-          else:
-              if self.lista[i*2] < self.lista[i*2+1]:
+          if i * 2 + 1 > self.tamanoActual: #ve si existe hijo derecho, si es mayor entonces no existe 
+              return i * 2 #solo hay hijo izquierdo
+          else: #existen ambos hijos
+              if self.lista[i*2] < self.lista[i*2+1]: #compara los dos hijos (con lt)
                   return i * 2
               else:
                   return i * 2 + 1
